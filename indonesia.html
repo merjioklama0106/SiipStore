@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>NOKOS | Siip Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * {margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif;}
+    body {background: #111; color: #fff; padding: 20px;}
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .back-button {
+      position: absolute;
+      left: 0;
+      background: #222;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      color: #00aaff;
+      text-decoration: none;
+      border: 1px solid #00aaff;
+    }
+
+    .title {
+      font-size: 22px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    .image-wrapper {
+      width: 100%;
+      max-width: 300px;
+      aspect-ratio: 1/1;
+      margin: 0 auto;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-wrapper img {
+      width: 80%;
+    }
+
+    .info {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .badge {
+      background: #007bff;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      margin-right: 10px;
+    }
+
+    .view-count {
+      background: #333;
+      color: #ccc;
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      display: inline-block;
+    }
+
+    .notes {
+      margin-top: 15px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 15px;
+      border-radius: 12px;
+      font-size: 14px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .subtitle {
+      margin-top: 30px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .product {
+      margin-top: 20px;
+      background: linear-gradient(145deg, #1c1c1c, #141414);
+      border-radius: 16px;
+      padding: 18px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      box-shadow: 6px 6px 12px #0d0d0d, -6px -6px 12px #1d1d1d;
+      transition: all 0.3s ease;
+    }
+
+    .product:hover {
+      transform: translateY(-4px);
+      box-shadow: 8px 8px 14px #0b0b0b, -8px -8px 14px #1f1f1f;
+    }
+
+    .product-left, .product-right {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .product-left h3 {
+      font-size: 15px;
+      margin-bottom: 0;
+    }
+
+    .price {
+      color: #00ccff;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .discount {
+      font-size: 12px;
+      font-weight: bold;
+      padding: 4px 10px;
+      border-radius: 6px;
+      display: inline-block;
+      color: white;
+      background: linear-gradient(90deg, #ff0000, #ff66cc, #9900ff, #ff0000);
+      background-size: 400%;
+      animation: colorRun 2s linear infinite;
+      width: max-content;
+      box-shadow: 0 0 8px rgba(255, 0, 128, 0.7);
+    }
+
+    @keyframes colorRun {
+      0% { background-position: 100% 0; }
+      100% { background-position: 0 0; }
+    }
+
+    .product-right {
+      align-items: flex-end;
+      justify-content: space-between;
+      height: 100%;
+      text-align: right;
+    }
+
+    .product-right div:nth-child(1) {
+      font-size: 14px;
+      color: #00ff99;
+      margin-top: 2px;
+    }
+
+    .product-right s {
+      font-size: 14px;
+      color: #ff9999;
+    }
+
+    .manual {
+      font-size: 14px;
+      color: #ccc;
+    }
+
+    .popup {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+
+    .popup-content {
+      background: #222;
+      padding: 20px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 400px;
+      position: relative;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .popup-content h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .popup-content label {
+      display: block;
+      margin: 10px 0 5px;
+      font-size: 14px;
+    }
+
+    .popup-content input,
+    .popup-content select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      background: #333;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .popup-content button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      background: #00cc99;
+      color: #fff;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close-btn {
+      position: absolute;
+      right: 15px;
+      top: 10px;
+      font-size: 30px;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <a href="index.html" class="back-button">Back</a>
+    <div class="title">NOKOS INDONESIA</div>
+  </div>
+
+  <div class="image-wrapper">
+    <img src="nokos.jpg" alt="Nokos Logo">
+  </div>
+
+  <div class="info">
+    <span class="badge">Nokos WhatsApp</span>
+    <span class="view-count">Dilihat: <span id="views">0</span></span>
+  </div>
+
+  <div class="notes">
+    Notes:
+    <br>
+    Hanya 1x Verifikasi
+    <br>
+    Nokos (Virtual Number) Adalah Nomor Fake/Tanpa Kartu Yang Bisa Kamu Daftarkan KeWhatsApp Kamu
+  </div>
+
+  <div class="subtitle">Daftar Produk</div>
+
+  <!-- Produk -->
+  <div class="product" onclick="openPopup('NOMOR KOSONG WHATSAPP', '8000')">
+    <div class="product-left">
+      <h3>NOMOR KOSONG WHATSAPP</h3>
+      <div class="price">Rp8.000</div>
+      <div class="discount">Disc 80%</div>
+    </div>
+    <div class="product-right">
+      <div>Tersedia</div>
+      <s>Rp10.000</s>
+      <span class="manual">📦 Pengiriman Manual</span>
+    </div>
+  </div>
+
+  <!-- Popup -->
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <span class="close-btn" onclick="closePopup()">×</span>
+      <h3>Konfirmasi Pembelian</h3>
+      <p id="popupProduct"></p>
+      <p id="popupHarga"></p>
+      <label>Nama kamu</label>
+      <input type="text" id="namaInput" placeholder="Nama kamu">
+      <label>Pilih metode pembayaran</label>
+      <select id="metodeInput">
+        <option value="">Pilih Metode pembayaran</option>
+        <option value="Dana">Dana</option>
+        <option value="Qris">Qris</option>
+      </select>
+      <button onclick="kirimWhatsApp()">Pesan Sekarang</button>
+    </div>
+  </div>
+
+  <script>
+    let views = localStorage.getItem("id_views") || 0;
+    views++;
+    localStorage.setItem("id_views", views);
+    document.getElementById("views").textContent = views;
+
+    let currentProduct = "", currentHarga = "";
+    function openPopup(product, harga) {
+      currentProduct = product;
+      currentHarga = harga;
+      document.getElementById("popupProduct").textContent = product;
+      document.getElementById("popupHarga").textContent = "Harga: Rp" + parseInt(harga).toLocaleString();
+      document.getElementById("popup").style.display = "flex";
+    }
+
+    function closePopup() {
+      document.getElementById("popup").style.display = "none";
+    }
+
+    function kirimWhatsApp() {
+      const nama = document.getElementById("namaInput").value.trim();
+      const metode = document.getElementById("metodeInput").value;
+      if (!nama || !metode) {
+        alert("Harap isi nama dan pilih metode pembayaran!");
+        return;
+      }
+      const pesan = `Halo, saya ingin pesan:\n${currentProduct}\nHarga: Rp${parseInt(currentHarga).toLocaleString()}\nNama: ${nama}\nMetode: ${metode}`;
+      window.open(`https://wa.me/628979687563?text=${encodeURIComponent(pesan)}`, "_blank");
+    }
+  </script>
+
+</body>
+</html>

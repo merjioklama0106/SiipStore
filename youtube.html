@@ -262,18 +262,31 @@
 
   <div class="subtitle">Daftar Produk</div>
 
-  <!-- Produk -->
 
 <!-- Produk 1 -->
-<div class="product" onclick="openPopup('YOUTUBE – PREMIUM 1 BULAN', '4000')">
+<div class="product" onclick="openPopup('YOUTUBE – PREMIUM 1 BULAN (SHARING)', '4000')">
   <div class="product-left">
-    <h3>PREMIUM 1 BULAN</h3>
+    <h3>PREMIUM 1 BULAN (SHARING)</h3>
     <div class="price">Rp4.000</div>
     <div class="discount">Disc 60%</div>
   </div>
   <div class="product-right">
     <div>Tersedia</div>
     <s>Rp10.000</s>
+    <span class="manual">📦 Pengiriman Manual</span>
+  </div>
+</div>
+
+<!-- Produk 1 -->
+<div class="product" onclick="openPopup('YOUTUBE – PREMIUM 1 BULAN (SELLER)', '8000')">
+  <div class="product-left">
+    <h3>PREMIUM 1 BULAN (SELLER)</h3>
+    <div class="price">Rp8.000</div>
+    <div class="discount">Disc 70%</div>
+  </div>
+  <div class="product-right">
+    <div>Tersedia</div>
+    <s>Rp15.000</s>
     <span class="manual">📦 Pengiriman Manual</span>
   </div>
 </div>
@@ -367,7 +380,7 @@
         return;
       }
       const pesan = `Halo, saya ingin pesan:\n${currentProduct}\nHarga: Rp${parseInt(currentHarga).toLocaleString()}\nNama: ${nama}\nMetode: ${metode}`;
-      window.open(`https://wa.me/628979687563?text=${encodeURIComponent(pesan)}`, "_blank");
+      window.open(`https://wa.me/6283189341353?text=${encodeURIComponent(pesan)}`, "_blank");
     }
   </script>
 
